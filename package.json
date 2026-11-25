@@ -1,0 +1,21 @@
+{
+  "name": "areaprint-v02",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "dev:https": "HTTPS=1 vite --host --port 5443"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "lighthouse": "^13.6.0",
+    "playwright": "^1.65.1",
+    "sharp": "^0.35.5",
+    "subset-font": "^2.9.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}

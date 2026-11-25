@@ -1,0 +1,127 @@
+/* DM Sans: vlastná podmnožina z plného variabilného fontu (scripts/font.ts).
+ * opsz je zapečený na 14 (ako v dizajne), wght 400–500, zachované SS01–SS05
+ * (podmnožiny z Google Fonts API štylistické sady neobsahujú, „a“ by malo iný tvar). */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("/fonts/dmsans.woff2") format("woff2");
+}
+
+/* ---------- Škálovanie ----------
+ * Mobil a tablet: 1rem = 16px.
+ * Desktop od 1024: --scale = clamp(0.8, šírka / 1280, 1.5), cez font-size na <html>.
+ * --vw nastavuje JS (šírka bez scrollbaru), fallback je 100vw. */
+html { font-size: 16px; }
+@media (min-width: 1024px) {
+  html { font-size: clamp(12.8px, calc(var(--vw, 100vw) * 0.0125), 24px); }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-lh);
+  font-feature-settings: "ss01", "ss02", "ss03", "ss04", "ss05";
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; letter-spacing: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+ul, ol { list-style: none; padding: 0; }
+h1, h2, h3, h4, p { font-weight: 400; font-size: inherit; line-height: inherit; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: var(--spacing-component-lg); top: var(--spacing-component-lg); z-index: 100;
+  transform: translateY(-200%);
+  background: var(--color-bg-dark); color: var(--color-text-on-dark);
+  padding: var(--spacing-component-md) var(--spacing-component-lg); border-radius: var(--radius-full);
+}
+.skip-link:focus { transform: none; }
+
+/* Viditeľný focus: dvojitý prstenec, čitateľný na svetlom aj tmavom pozadí */
+:focus-visible {
+  outline: 2px solid var(--color-border-strong);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-bg-page);
+}
+.on-dark :focus-visible { outline-color: var(--color-text-on-dark); box-shadow: 0 0 0 2px var(--color-bg-dark); }
+
+/* ---------- Typografia (štýly z Figmy) ---------- */
+.t-display-xl { font-size: var(--type-display-xl-size); line-height: var(--type-display-lh); letter-spacing: var(--type-display-ls); }
+.t-display-l  { font-size: var(--type-display-l-size);  line-height: var(--type-display-lh); letter-spacing: var(--type-display-ls); }
+.t-heading-xl { font-size: var(--type-heading-xl-size); line-height: var(--type-heading-xl-lh); letter-spacing: var(--type-heading-ls); }
+.t-heading-l  { font-size: var(--type-heading-l-size);  line-height: var(--type-heading-l-lh);  letter-spacing: var(--type-heading-ls); }
+.t-heading-m  { font-size: var(--type-heading-m-size);  line-height: var(--type-heading-m-lh);  letter-spacing: var(--type-heading-ls); }
+.t-heading-s  { font-size: var(--type-heading-s-size);  line-height: var(--type-heading-s-lh);  letter-spacing: var(--type-heading-ls); }
+.t-heading-xs { font-size: var(--type-heading-xs-size); line-height: var(--type-heading-xs-lh); letter-spacing: var(--type-heading-ls); }
+.t-body-l { font-size: var(--type-body-l-size); line-height: var(--type-body-lh); }
+.t-body-m { font-size: var(--type-body-m-size); line-height: var(--type-body-lh); }
+.t-body-s { font-size: var(--type-body-s-size); line-height: var(--type-body-lh); }
+.t-label-l { font-size: var(--type-label-l-size); line-height: var(--type-label-lh); }
+.t-label-m { font-size: var(--type-label-m-size); line-height: var(--type-label-lh); }
+.t-label-s { font-size: var(--type-label-s-size); line-height: var(--type-label-lh); }
+.t-button-m { font-size: var(--type-button-m-size); line-height: var(--type-button-lh); letter-spacing: var(--type-button-ls); font-weight: 500; }
+.t-button-s { font-size: var(--type-button-s-size); line-height: var(--type-button-lh); letter-spacing: var(--type-button-ls); font-weight: 500; }
+.t-link-m { font-size: var(--type-link-m-size); line-height: var(--type-link-lh); letter-spacing: var(--type-link-ls); font-weight: 500; }
+.muted { color: var(--color-text-muted); }
+
+/* Zalomenia riadkov podľa breakpointu (Figma má rozdielne <br> pre desktop a mobil) */
+@media (max-width: 1023.98px) { .br-d { display: none; } }
+@media (min-width: 1024px) { .br-m { display: none; } }
+
+/* ---------- Layout stránky ----------
+ * Desktop: rámec 1280, okraj 24, medzera medzi blokmi 16.
+ * Mobil: okraj 24, medzera 16. Tablet: okraj 40 (návrh). */
+.page {
+  --page-pad: var(--spacing-content-xs);
+  display: flex; flex-direction: column;
+  gap: var(--spacing-component-lg);
+  padding: var(--page-pad);
+}
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .page { --page-pad: 2.5rem; }
+}
+.section { display: flex; flex-direction: column; gap: var(--spacing-component-lg); scroll-margin-top: var(--spacing-component-lg); }
+.spacer-lg { height: var(--spacing-content-lg); }
+.spacer-m { display: none; height: var(--spacing-content-xs); }
+@media (max-width: 1023.98px) {
+  .spacer-lg { height: var(--spacing-content-xs); }
+  .spacer-m { display: block; }
+}
+
+/* ---------- Postupné objavenie (HANDOFF 5) ---------- */
+html.motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 1.25rem, 0);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.motion [data-reveal="img"] { transform: none; }
+html.motion [data-reveal="img"] > img,
+html.motion [data-reveal="img"] > picture > img {
+  transform: scale(1.04);
+  transition: transform var(--dur-reveal-img) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.motion [data-reveal="img"] { transition-duration: var(--dur-reveal-img); }
+html.motion [data-reveal].is-in { opacity: 1; transform: none; }
+html.motion [data-reveal="img"].is-in > img,
+html.motion [data-reveal="img"].is-in > picture > img { transform: none; }

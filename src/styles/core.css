@@ -1,0 +1,240 @@
+/* Základné komponenty (spoločné s v01). Rozmery v rem (16px = 1rem pri 1280). */
+
+/* ===================== Button (76:334) ===================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full); white-space: nowrap;
+  padding: var(--spacing-component-md) var(--spacing-component-lg);
+  transition: background-color var(--dur-hover) ease, border-color var(--dur-hover) ease, color var(--dur-hover) ease;
+}
+.btn--l { padding: var(--spacing-component-md) var(--spacing-content-xs); }
+.btn--accent { background: var(--color-bg-accent); color: var(--color-text-primary); }
+.btn--outline { border: 1px solid var(--color-border-default); color: var(--color-text-primary); }
+.btn--outline-dark { border: 1px solid var(--color-border-on-dark); color: var(--color-text-on-dark); }
+/* Hover: farby sa invertujú voči podkladu (na svetlom tmavé tlačidlo, na tmavom svetlé) */
+.btn--accent:hover, .btn--outline:hover { background: var(--color-bg-dark); border-color: var(--color-bg-dark); color: var(--color-text-on-dark); }
+.on-dark .btn--accent:hover, .btn--outline-dark:hover { background: var(--color-bg-page); border-color: var(--color-bg-page); color: var(--color-text-primary); }
+/* Hover: text odíde hore a zdola príde znova */
+/* okno o 0,2em vyššie ako riadok (aby sa neorezali diakritika a dĺžne), kópie sú od seba 0,4em */
+.btn__label { display: block; overflow: hidden; padding-block: 0.2em; margin-block: -0.2em; }
+.btn__roll { position: relative; display: block; transition: transform 450ms var(--ease-out); }
+.btn__roll > span { display: block; }
+.btn__roll > span + span { position: absolute; left: 0; right: 0; top: calc(100% + 0.4em); }
+.btn:is(:hover, :focus-visible) .btn__roll { transform: translateY(calc(-100% - 0.4em)); }
+@media (prefers-reduced-motion: reduce) { .btn__roll { transition: none; } }
+.btn--full { width: 100%; }
+
+/* ===================== Nav item (76:341) ===================== */
+.nav-item {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  padding: var(--spacing-component-sm) var(--spacing-component-lg);
+  border-radius: var(--radius-full);
+  transition: background-color var(--dur-hover) ease;
+}
+.nav-item:hover, .nav-item.is-active { background: var(--color-bg-page); }
+
+/* ===================== Icon button (76:344) ===================== */
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 3.5rem; height: 3.5rem; border-radius: var(--radius-full);
+  background: var(--color-bg-page); color: var(--color-text-primary);
+  font-size: 1.25rem; line-height: 1.4; /* 20 px: v komponente bez textového štýlu (mimo tokenov) */
+}
+/* Hover karty: šípka odíde do pravého horného rohu a nová príde z ľavého dolného */
+.icon-btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  clip-path: circle(50%); /* orezanie aj počas animácie (Chrome inak niekedy ignoruje zaoblenie) */
+  transition: background-color 300ms ease, color 300ms ease;
+}
+/* obe šípky majú veľkosť celého kruhu, takže posun o 100 % ich dostane úplne mimo */
+.icon-btn__arrow, .icon-btn::after { position: absolute; inset: 0; display: grid; place-items: center; transition: transform 500ms var(--ease-out); }
+.icon-btn::after { content: "↗"; transform: translate(-100%, 100%); }
+:is(.solution-tile, .real-card, .article-tile):is(:hover, :focus-within) .icon-btn__arrow { transform: translate(100%, -100%); }
+:is(.solution-tile, .real-card, .article-tile):is(:hover, :focus-within) .icon-btn::after { transform: none; }
+@media (prefers-reduced-motion: reduce) { .icon-btn__arrow, .icon-btn::after { transition: none; } }
+
+/* ===================== Chip (76:351) ===================== */
+.chip {
+  display: inline-flex; white-space: nowrap;
+  padding: var(--spacing-component-xs) var(--spacing-component-md);
+  border-radius: var(--radius-full); color: var(--color-text-primary);
+}
+.chip--pastel { background: var(--color-bg-pastel-subtle); }
+.chip--light { background: var(--color-bg-page); }
+
+/* ===================== Icon pill (76:358) ===================== */
+.icon-pill {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; align-self: flex-start;
+  padding: var(--spacing-component-lg); border-radius: var(--radius-full);
+}
+.icon-pill .icon { width: 2rem; height: 2rem; }
+.icon-pill--light { background: var(--color-bg-page); color: var(--color-text-primary); }
+.icon-pill--dark { width: 4.5rem; height: 4.5rem; background: var(--color-bg-dark-subtle); color: var(--color-text-on-dark); }
+
+/* ===================== Slider dots (81:938) ===================== */
+.dots { display: none; align-items: center; justify-content: center; gap: var(--spacing-component-sm); height: 0.625rem; }
+.dots__dot {
+  width: 0.5rem; height: 0.5rem; border-radius: var(--radius-full);
+  background: var(--color-text-primary); opacity: 0.25;
+  transition: opacity var(--dur-hover) ease, width var(--dur-hover) ease, height var(--dur-hover) ease;
+}
+.dots__dot.is-active { width: 0.625rem; height: 0.625rem; opacity: 1; }
+
+/* ===================== Client logo (77:503) ===================== */
+.client-logo {
+  display: flex; align-items: center; justify-content: center; flex: none;
+  width: 7.5625rem; height: 4rem; padding: var(--spacing-component-sm);
+  border-radius: var(--radius-sm); background: var(--color-bg-page);
+}
+.client-logo img { width: 6rem; height: 3rem; object-fit: contain; opacity: 0.75; }
+
+/* ===================== Photo ===================== */
+.photo { display: block; overflow: hidden; border-radius: var(--radius-md); }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===================== Stretched link (celá karta je klikateľná) ===================== */
+.stretched::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.stretched:focus-visible { outline: none; box-shadow: none; }
+:is(.solution-tile, .real-card, .article-tile):has(.stretched:focus-visible) {
+  outline: 2px solid var(--color-border-strong); outline-offset: 2px;
+}
+
+/* ===================== Marquee (pilulky a logá) ===================== */
+.marquee { position: relative; width: 100%; }
+.marquee__track { display: flex; width: max-content; will-change: transform; }
+.marquee__track > li { display: flex; flex: none; }
+
+/* ===================== Navigation (77:548) ===================== */
+.navigation {
+  display: flex; align-items: center;
+  padding: var(--spacing-component-md) var(--spacing-component-md) var(--spacing-component-md) var(--spacing-content-xs);
+  border-radius: var(--radius-full); background: var(--color-bg-subtle);
+}
+.navigation__logo { display: block; flex: 1 1 0; min-width: 0; }
+.navigation__logo .icon { width: 10.25rem; height: 2rem; max-width: none; }
+.navigation__items { display: flex; align-items: center; gap: var(--spacing-component-xs); }
+.navigation__end { display: flex; flex: 1 1 0; justify-content: flex-end; }
+.menu-btn {
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  width: 2.5rem; height: 2.5rem; border-radius: var(--radius-full); background: var(--color-bg-page);
+}
+.menu-btn span { display: block; width: 1rem; height: 1.5px; border-radius: 1px; background: var(--color-text-primary); transition: transform var(--dur-hover) var(--ease-out); }
+.menu-btn.is-open span:first-child { transform: translateY(3.25px) rotate(45deg); }
+.menu-btn.is-open span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* Mobilné menu (NÁVRH, nie je vo Figme) */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 50; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--spacing-content-md);
+  padding: var(--page-pad, var(--spacing-content-xs));
+  background: var(--color-bg-page);
+}
+.mobile-menu[hidden] { display: none; }
+.mobile-menu__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--spacing-component-md) var(--spacing-component-md) var(--spacing-component-md) var(--spacing-component-lg);
+  border-radius: var(--radius-full); background: var(--color-bg-subtle);
+}
+.mobile-menu__bar .menu-btn { display: flex; }
+.mobile-menu__list { display: flex; flex-direction: column; gap: var(--spacing-component-sm); padding-inline: var(--spacing-component-lg); }
+.mobile-menu__link { display: block; padding-block: var(--spacing-component-sm); }
+.mobile-menu__link:hover { color: var(--color-text-muted); }
+.mobile-menu.is-open { animation: menu-in 300ms var(--ease-out); }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-0.5rem); } }
+@media (prefers-reduced-motion: reduce) { .mobile-menu.is-open { animation: none; } }
+/* ===================== CTA banner (81:886) ===================== */
+.cta-banner {
+  display: flex; align-items: center; gap: var(--spacing-content-md);
+  padding: var(--spacing-content-sm); border-radius: var(--radius-lg);
+  background: var(--color-bg-dark); color: var(--color-text-on-dark);
+}
+.cta-banner__text { flex: 1; }
+.cta-banner .icon-pill { align-self: center; }
+
+/* ===================== Footer (81:937) =====================
+ * Päta vo Figme obsahuje hodnoty mimo tokenov (skupina zmenšená na 89,3 %).
+ * Pre zhodu s dizajnom sú tu ako lokálne premenné; sú v otvorených otázkach. */
+.footer {
+  --f-gap-head: 2.0094rem;    /* 32.151 */
+  --f-gap-form: 1.4233rem;    /* 22.773 */
+  --f-gap-col: 2.2327rem;     /* 35.723 */
+  --f-gap-links: 1.1164rem;   /* 17.862 */
+  --f-input-h: 3.5723rem;     /* 57.157 */
+  --f-input-pl: 1.5631rem;    /* 25.01 */
+  --f-btn-h: 2.6793rem;       /* 42.868 */
+  --f-btn-px: 1.1164rem;      /* 17.862 */
+  --f-btn-right: 0.3856rem;   /* 6.17 */
+  --f-btn-size: 1.0047rem;    /* 16.075 */
+  --f-border: 0.893px;
+  --f-box: 1.7861rem;         /* 28.578 */
+  --f-box-r: 0.3349rem;       /* 5.358 */
+  --f-consent-gap: 1.0605rem; /* 16.968 */
+  --f-consent-size: 0.7256rem;/* 11.61 */
+  border-radius: var(--radius-lg); background: var(--color-bg-dark); color: var(--color-text-on-dark);
+  overflow: hidden; scroll-margin-top: var(--spacing-component-lg);
+}
+.footer a { transition: opacity var(--dur-hover) ease; }
+.footer a:hover { opacity: 0.75; }
+.footer__news { display: flex; align-items: flex-end; gap: var(--spacing-section-sm); padding: var(--spacing-content-md); }
+.footer__news-head { flex: none; width: 38rem; display: flex; flex-direction: column; gap: var(--f-gap-head); }
+.newsletter { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--f-gap-form); }
+.newsletter__row { position: relative; }
+.newsletter__input {
+  display: block; width: 100%; height: var(--f-input-h);
+  padding: 0 calc(var(--f-btn-px) * 2 + 6rem) 0 var(--f-input-pl);
+  border: var(--f-border) solid var(--color-border-on-dark); border-radius: var(--radius-full);
+  background: var(--color-bg-dark-subtle); color: var(--color-text-on-dark);
+  font-size: var(--type-label-m-size); line-height: var(--type-label-lh);
+  transition: border-color var(--dur-hover) ease, box-shadow var(--dur-hover) ease;
+}
+.newsletter__input::placeholder { color: var(--color-text-on-dark); opacity: 1; }
+.newsletter__input:focus { outline: none; border-color: var(--color-text-on-dark-muted); box-shadow: 0 0 0 2px var(--color-border-on-dark); }
+.newsletter__input:focus::placeholder { color: var(--color-text-on-dark-muted); }
+.newsletter__submit {
+  position: absolute; right: var(--f-btn-right); top: 50%; transform: translateY(-50%);
+  height: var(--f-btn-h); padding: 0 var(--f-btn-px); border-radius: var(--radius-full);
+  background: var(--color-bg-accent); color: var(--color-text-primary);
+  font-size: var(--f-btn-size); line-height: 1; font-feature-settings: "ss02", "ss03", "ss04", "ss05";
+  transition: background-color var(--dur-hover) ease;
+}
+.newsletter__submit:hover { background: var(--color-bg-accent-hover); }
+.newsletter__consent { position: relative; display: flex; align-items: center; gap: var(--f-consent-gap); cursor: pointer; }
+.newsletter__consent input { position: absolute; opacity: 0; width: var(--f-box); height: var(--f-box); margin: 0; cursor: pointer; }
+.newsletter__box {
+  flex: none; width: var(--f-box); height: var(--f-box); border-radius: var(--f-box-r);
+  border: var(--f-border) solid var(--color-border-on-dark); background: var(--color-bg-dark-subtle);
+  display: grid; place-items: center;
+}
+.newsletter__consent input:checked + .newsletter__box::after {
+  content: ""; width: 40%; height: 22%; margin-top: -10%;
+  border-left: 2px solid var(--color-text-on-dark); border-bottom: 2px solid var(--color-text-on-dark); transform: rotate(-45deg);
+}
+.newsletter__consent input:focus-visible + .newsletter__box { outline: 2px solid var(--color-text-on-dark); outline-offset: 2px; }
+.newsletter__consent-text { font-size: var(--f-consent-size); line-height: 1; font-feature-settings: "ss02", "ss03", "ss04", "ss05"; }
+.newsletter__msg:empty { display: none; }
+.newsletter__msg { font-size: var(--type-body-s-size); line-height: var(--type-body-lh); color: var(--color-text-on-dark); }
+.newsletter.is-sent .newsletter__input { border-color: var(--color-border-on-dark); color: var(--color-text-on-dark-muted); }
+.newsletter.is-invalid .newsletter__input:invalid, .newsletter.is-invalid input[type="checkbox"]:invalid + .newsletter__box { border-color: var(--color-text-on-dark); }
+
+.footer__bottom { display: flex; align-items: center; gap: var(--spacing-section-sm); padding: var(--spacing-content-md); }
+.footer__symbol { flex: none; width: 38rem; }
+.footer__symbol .icon { width: 28.3831rem; height: 28.3831rem; }
+.footer__info { flex: 1; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; }
+.footer__cols { display: flex; justify-content: space-between; align-items: flex-start; white-space: nowrap; }
+.footer__col { display: flex; flex-direction: column; gap: var(--f-gap-col); }
+.footer__col--fixed { width: 11.5rem; }
+.footer__links { display: flex; flex-direction: column; gap: var(--f-gap-links); }
+.footer__contact { display: flex; justify-content: space-between; font-style: normal; font-size: var(--type-label-l-size); line-height: var(--type-label-lh); white-space: nowrap; }
+.footer__fixed { width: 11.5rem; }
+.footer__legal { display: flex; align-items: center; justify-content: space-between; }
+.footer__logo { display: block; color: var(--color-text-on-dark); }
+.footer__logo .icon { width: 10.689rem; height: 2.0867rem; overflow: visible; }
+
+/* prefers-reduced-motion: pásy stoja a dajú sa posúvať horizontálne */
+.marquee--static {
+  overflow-x: auto; scrollbar-width: none;
+  /* pás ide až po okraj dlaždice ako vo Figme */
+  width: auto; margin-inline: calc(-1 * var(--bleed, 0px)); padding-inline: var(--bleed, 0px);
+}
+.marquee--static::-webkit-scrollbar { display: none; }
+.marquee--static .marquee__track { width: max-content; }

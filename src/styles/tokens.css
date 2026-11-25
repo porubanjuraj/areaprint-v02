@@ -1,0 +1,108 @@
+/*
+ * Areaprint: design tokens pre web (zdroj: Figma Areaprint - Webdesign, kolekcie Brand, Colour, Spacing, Typography, Radius).
+ * Hodnoty sú rovnaké ako v ../../../tokens.css, len rozmery sú v rem (1rem = 16px pri šírke 1280).
+ * Desktop sa celý škáluje cez font-size na <html> (pozri base.css), mobil má 1rem = 16px.
+ */
+:root {
+  /* Brand */
+  --brand-base: #F7F3EA;
+  --brand-base-tint: #F1EADA;
+  --brand-secondary: #3B1F33;
+  --brand-secondary-tint: #4A2740;
+  --brand-accent: #FF7A1F;
+  --brand-accent-dark: #E66E1C;
+  --brand-pastel: #D6B8F2;
+  --brand-pastel-tint: #CBA4EE;
+
+  /* Colour (muted = 75 % podľa aktuálnych premenných vo Figme, nie 64 %) */
+  --color-bg-page: var(--brand-base);
+  --color-bg-subtle: var(--brand-base-tint);
+  --color-bg-dark: var(--brand-secondary);
+  --color-bg-dark-subtle: var(--brand-secondary-tint);
+  --color-bg-accent: var(--brand-accent);
+  --color-bg-accent-hover: var(--brand-accent-dark);
+  --color-bg-pastel: var(--brand-pastel);
+  --color-bg-pastel-subtle: var(--brand-pastel-tint);
+  --color-text-primary: var(--brand-secondary);
+  --color-text-muted: rgb(59 31 51 / 0.75);
+  --color-text-on-dark: var(--brand-base);
+  --color-text-on-dark-muted: rgb(247 243 234 / 0.75);
+  --color-icon-accent: var(--brand-accent);
+  --color-icon-on-dark-muted: rgb(247 243 234 / 0.75);
+  --color-border-default: rgb(59 31 51 / 0.16);
+  --color-border-strong: var(--brand-secondary);
+  --color-border-on-dark: rgb(247 243 234 / 0.2);
+
+  /* Spacing (jeden mód) */
+  --spacing-component-xs: 0.25rem;  /* 4 */
+  --spacing-component-sm: 0.5rem;   /* 8 */
+  --spacing-component-md: 0.75rem;  /* 12 */
+  --spacing-component-lg: 1rem;     /* 16 */
+  --spacing-content-xs: 1.5rem;     /* 24 */
+  --spacing-content-sm: 2rem;       /* 32 */
+  --spacing-content-md: 3rem;       /* 48 */
+  --spacing-content-lg: 4rem;       /* 64 */
+  --spacing-section-xs: 5rem;       /* 80 */
+  --spacing-section-sm: 6rem;       /* 96 */
+  --spacing-section-md: 8rem;       /* 128 */
+  --spacing-section-lg: 11rem;      /* 176 */
+
+  /* Radius */
+  --radius-sm: 1rem;      /* 16 */
+  --radius-md: 1.25rem;   /* 20 */
+  --radius-lg: 2rem;      /* 32 */
+  --radius-full: 999px;
+
+  /* Typography: Desktop mód */
+  --font-family: "DM Sans", system-ui, sans-serif;
+  --type-display-xl-size: 5rem;      /* 80 */
+  --type-display-l-size: 4rem;       /* 64 */
+  --type-heading-xl-size: 2.5rem;    /* 40 */
+  --type-heading-l-size: 2rem;       /* 32 */
+  --type-heading-m-size: 1.75rem;    /* 28 */
+  --type-heading-s-size: 1.5rem;     /* 24 */
+  --type-heading-xs-size: 1.375rem;  /* 22 */
+  --type-body-l-size: 1.125rem;      /* 18 */
+  --type-body-m-size: 1rem;          /* 16 */
+  --type-body-s-size: 0.875rem;      /* 14 */
+  --type-label-l-size: 1.125rem;     /* 18 */
+  --type-label-m-size: 1rem;         /* 16 */
+  --type-label-s-size: 0.875rem;     /* 14 */
+  --type-button-m-size: 1rem;        /* 16 */
+  --type-button-s-size: 0.875rem;    /* 14 */
+  --type-link-m-size: 1rem;          /* 16 */
+
+  --type-display-lh: 0.95;   --type-display-ls: -0.04em;
+  --type-heading-xl-lh: 1.05;
+  --type-heading-l-lh: 1.1;
+  --type-heading-m-lh: 1.1;
+  --type-heading-s-lh: 1.2;
+  --type-heading-xs-lh: 1.1;
+  --type-heading-ls: -0.03em;
+  --type-body-lh: 1.4;
+  --type-label-lh: 1;
+  --type-button-lh: 1;       --type-button-ls: -0.01em;
+  --type-link-lh: 1.4;       --type-link-ls: -0.01em;
+
+  /* Pohyb (HANDOFF sekcia 5) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-reveal: 700ms;
+  --dur-reveal-img: 900ms;
+  --dur-hover: 200ms;
+}
+
+/* Typography: Mobile mód (< 768 px a tablet) */
+@media (max-width: 1023.98px) {
+  :root {
+    --type-display-xl-size: 2.5rem;    /* 40 */
+    --type-display-l-size: 2.5rem;     /* 40 */
+    --type-heading-xl-size: 1.875rem;  /* 30 */
+    --type-heading-l-size: 1.625rem;   /* 26 */
+    --type-heading-m-size: 1.5rem;     /* 24 */
+    --type-heading-s-size: 1.25rem;    /* 20 */
+    --type-heading-xs-size: 1.25rem;   /* 20 */
+    --type-body-l-size: 1.0625rem;     /* 17 */
+    --type-label-l-size: 1rem;         /* 16 */
+    --type-label-m-size: 0.9375rem;    /* 15 */
+  }
+}
