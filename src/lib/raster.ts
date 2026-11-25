@@ -169,6 +169,8 @@ class RasterTile {
   prog: WebGLProgram;
   loc: Record<string, WebGLUniformLocation | null> = {};
   pos: [number, number]; target: [number, number] | null = null;
+  // posledná poloha kurzora: po odchode myši tam raster ostane (a jemne pláva okolo nej)
+  anchor: [number, number] | null = null; driftAmp = 1;
   hover = 0; hoverT = 0; visible = false; dirty = true;
   t0 = performance.now() + Math.random() * 10000;
 
@@ -179,12 +181,12 @@ class RasterTile {
     this.gl = gl;
     this.prog = this.compile();
     this.pos = [...this.p.center];
-    MOBILE?.addEventListener("change", () => { this.pos = [...this.p.center]; this.draw(); });
+    MOBILE?.addEventListener("change", () => { this.pos = [...this.p.center]; this.anchor = null; this.draw(); });
     el.addEventListener("pointermove", e => {
       if (e.pointerType !== "mouse" || reduce) return;
       const r = el.getBoundingClientRect();
       this.target = [((e.clientX - r.left) / r.width) * 100, ((e.clientY - r.top) / r.height) * 100];
-      this.hoverT = 1; el.classList.add("is-pointer");
+      this.anchor = this.target; this.hoverT = 1; el.classList.add("is-pointer");
     });
     const leave = () => { this.target = null; this.hoverT = 0; el.classList.remove("is-pointer"); };
     el.addEventListener("pointerleave", leave);
@@ -226,13 +228,18 @@ class RasterTile {
     const p = this.p;
     let goal: [number, number] = [...p.center];
     if (!this.reduce) {
-      // voľný pohyb okolo pozície z dizajnu: amplitúda ~10 % plochy, perióda ~21 s a ~17 s
+      // voľný pohyb okolo poslednej polohy kurzora (inak pozície z dizajnu): amplitúda ~10 % plochy, perióda ~21 s a ~17 s
       const t = (now - this.t0) / 1000;
       const drift = [Math.sin((t * 2 * Math.PI) / 21) * 10, Math.cos((t * 2 * Math.PI) / 17) * 10];
+      // voľný pohyb sa po odchode kurzora rozbehne pomaly (bez skoku z miesta, kde kurzor zostal)
+      this.driftAmp = this.target ? 0 : this.driftAmp + (1 - this.driftAmp) * Math.min(1, 0.012 * dt / 16.67);
       if (this.target) goal = this.target;
       // naklonenie telefónu + slabší voľný pohyb, aby raster nestál, ani keď telefón držíš v pokoji
       else if (tilt) goal = [p.center[0] + tilt.dx + drift[0] * 0.4, p.center[1] + tilt.dy + drift[1] * 0.4];
-      else goal = [p.center[0] + drift[0], p.center[1] + drift[1]];
+      else {
+        const base = this.anchor ?? p.center; // kde bol naposledy kurzor, inak pozícia z dizajnu
+        goal = [base[0] + drift[0] * this.driftAmp, base[1] + drift[1] * this.driftAmp];
+      }
       const k = 1 - Math.pow(1 - 0.075, dt / (1000 / 60)); // 0.075 za frame pri 60 fps
       this.pos[0] += (goal[0] - this.pos[0]) * k;
       this.pos[1] += (goal[1] - this.pos[1]) * k;
@@ -274,6 +281,7 @@ export function initRasters() {
     catch { el.classList.add("raster-fallback"); } // bez WebGL2: statický PNG (raster-fallback v CSS)
   });
   if (!tiles.length) return;
+  if (import.meta.env.DEV) (window as unknown as { __rasters: RasterTile[] }).__rasters = tiles; // len na testovanie (qa/raster-stay.ts)
   if (reduce) {
     // statický raster v hodnotách z dizajnu (prekreslí sa len pri zmene veľkosti, pozri ResizeObserver)
     tiles.forEach(t => t.draw());
