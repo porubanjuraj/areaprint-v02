@@ -67,13 +67,13 @@ export function initMenu() {
   const close = (restore = true) => {
     menu.hidden = true; menu.classList.remove("is-open");
     openBtn.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
+    document.body.style.overflow = ""; document.documentElement.classList.remove("menu-open");
     if (restore) openBtn.focus();
   };
   const open = () => {
     menu.hidden = false; menu.classList.add("is-open");
     openBtn.setAttribute("aria-expanded", "true");
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"; document.documentElement.classList.add("menu-open");
     focusables()[1]?.focus();
   };
   openBtn.addEventListener("click", open);
@@ -134,4 +134,43 @@ export function initNewsletter() {
     msg.textContent = "Ďakujeme, ste prihlásení na odber. (Prototyp: nič sa neodoslalo.)";
   });
   form.addEventListener("input", () => { if (form.classList.contains("is-invalid")) { form.classList.remove("is-invalid"); msg.textContent = ""; } });
+}
+
+/* --- Navigácia pri scrolle: pri posune nadol sa skryje, pri posune nahor sa zobrazí pripnutá hore --- */
+export function initSmartNav() {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const nav = header?.querySelector<HTMLElement>(".navigation");
+  if (!header || !nav) return;
+  const root = document.documentElement;
+  let state: "static" | "hidden" | "shown" = "static";
+  let lastY = scrollY, raf = 0;
+  const setState = (s: typeof state, animate = true) => {
+    if (s === state) return;
+    if (s !== "static" && state === "static") {
+      header.style.height = `${nav.offsetHeight}px`; // miesto v layoute ostane, nič neposkočí
+      nav.classList.add("is-pinned", "no-anim");
+      void nav.offsetWidth;
+    }
+    if (s === "static") { nav.classList.remove("is-pinned", "is-shown", "no-anim"); header.style.height = ""; }
+    else {
+      if (animate) nav.classList.remove("no-anim");
+      nav.classList.toggle("is-shown", s === "shown");
+    }
+    state = s;
+  };
+  const update = () => {
+    raf = 0;
+    const y = Math.max(0, scrollY);
+    const dy = y - lastY;
+    const threshold = header.offsetTop + nav.offsetHeight + 24; // pod pôvodnou polohou navigácie
+    if (root.classList.contains("menu-open")) { lastY = y; return; }
+    if (y <= 0) setState("static");
+    else if (Math.abs(dy) < 6) return; // malé pohyby ignoruj (chvenie pri trackpade)
+    else if (dy > 0 && y > threshold) setState("hidden", state !== "static");
+    else if (dy < 0 && state !== "static") setState("shown");
+    lastY = y;
+  };
+  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  // klávesnica: keď sa do navigácie dostane focus, ukáž ju
+  nav.addEventListener("focusin", () => { if (state === "hidden") setState("shown"); });
 }

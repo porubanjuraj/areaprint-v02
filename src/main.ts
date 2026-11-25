@@ -4,7 +4,7 @@ import "./styles/core.css";
 import "./styles/v02.css";
 import { initRasters } from "./lib/raster";
 import { initMarquees } from "./lib/marquee";
-import { initMenu, initNewsletter, initReveal, initScale, initScrollSpy, initSliders } from "./lib/ui";
+import { initMenu, initNewsletter, initReveal, initScale, initScrollSpy, initSliders, initSmartNav } from "./lib/ui";
 import { initRealizations, initSolutionsIndex } from "./lib/v2";
 
 initScale();
@@ -12,6 +12,7 @@ initReveal();
 initMenu();
 initSliders();
 initScrollSpy();
+initSmartNav();
 initNewsletter();
 initMarquees();
 initSolutionsIndex();

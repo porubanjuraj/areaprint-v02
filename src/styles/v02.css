@@ -345,3 +345,17 @@ html.motion .stairs .stair[data-reveal].is-in { transform: none; }
 .raster-tile__canvas { opacity: 0; transition: opacity 400ms ease; }
 .raster-tile.is-live .raster-tile__canvas { opacity: 1; }
 .raster-fallback .raster-tile__canvas { display: none; }
+
+/* Navigácia pripnutá hore: pri scrolle nadol sa schová, pri scrolle nahor sa vysunie (JS: initSmartNav) */
+.navigation.is-pinned {
+  position: fixed; z-index: 40; top: var(--spacing-content-xs); left: var(--page-pad); right: var(--page-pad);
+  transform: translateY(calc(-100% - var(--spacing-content-sm)));
+  transition: transform 450ms var(--ease-out);
+  box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--brand-secondary) 10%, transparent);
+}
+.navigation.is-pinned.is-shown { transform: none; }
+.navigation.no-anim { transition: none; }
+@media (prefers-reduced-motion: reduce) { .navigation.is-pinned { transition: none; } }
+
+/* hero má vlastný stacking context: pripnutá navigácia v ňom musí byť nad ďalšími sekciami */
+.hero { z-index: 10; }
