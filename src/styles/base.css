@@ -86,6 +86,9 @@ h1, h2, h3, h4, p { font-weight: 400; font-size: inherit; line-height: inherit; 
 /* Zalomenia riadkov podľa breakpointu (Figma má rozdielne <br> pre desktop a mobil) */
 @media (max-width: 1023.98px) { .br-d { display: none; } }
 @media (min-width: 1024px) { .br-m { display: none; } }
+/* text len pre desktop / len pre mobil (keď sa copy vo Figme líši podľa breakpointu) */
+.copy-m { display: none; }
+@media (max-width: 1023.98px) { .copy-d { display: none; } .copy-m { display: inline; } }
 
 /* ---------- Layout stránky ----------
  * Desktop: rámec 1280, okraj 24, medzera medzi blokmi 16.

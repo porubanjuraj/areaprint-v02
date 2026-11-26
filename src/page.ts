@@ -1,6 +1,6 @@
 /**
  * Homepage v02 (Figma sekcia 58:4975, desktop 97:3346, mobil 113:1195).
- * Texty z Figmy. Hero má „Vaše zadanie / naše riešenie“ (v02 už má správne „naše“).
+ * Texty z Figmy. Hero „Jeden partner od tlače po montáž“ (upravené 26. 11. 2026).
  */
 import { Button, Chip, ClientLogo } from "./components/core";
 import {
@@ -60,12 +60,12 @@ function Hero() {
     <div class="hero__head" data-reveal>
       ${Chip({ label: "Vlastná výroba a 30 rokov skúseností", tone: "subtle" })}
       <h1 class="hero__title" id="hero-title">
-        <span class="hero__line">Vaše zadanie ${inlinePhoto("hero_tlac", "Ruka v rukavici vyberá čerstvo vytlačený hárok", "hero__photo--crop")}</span>
-        <span class="hero__line">naše ${inlinePhoto("hero_dielna", "Pracovníčka pri príprave tlače v dielni")} riešenie</span>
+        <span class="hero__line">Jeden partner ${inlinePhoto("hero_tlac", "Ruka v rukavici vyberá čerstvo vytlačený hárok", "hero__photo--crop")}</span>
+        <span class="hero__line">od tlače ${inlinePhoto("hero_dielna", "Pracovníčka pri príprave tlače v dielni")} <span class="hero__tail">po montáž</span></span>
       </h1>
     </div>
     <div class="hero__bottom" data-reveal style="--reveal-delay:100ms">
-      <p class="hero__lead t-body-m muted">Navrhneme, technicky pripravíme, vyrobíme a nainštalujeme.<br class="br-d"> Zastrešíme celý proces, aby ste sa mohli venovať svojmu biznisu.</p>
+      <p class="hero__lead t-body-m muted"><span class="copy-d">Nemusíte koordinovať grafika, tlačiareň a montážnikov.<br> Celé zadanie prevezmeme a odovzdáme hotové priamo na mieste.</span><span class="copy-m">Navrhneme, technicky pripravíme, vyrobíme a nainštalujeme. Zastrešíme celý proces, aby ste sa mohli venovať svojmu biznisu.</span></p>
       <div class="hero__actions">
         ${Button({ label: "Tlač na mieru", href: "#kontakt", style: "accent", size: "m", cls: "btn--h44" })}
         ${Button({ label: "Realizácie", href: "#realizacie", style: "outline", size: "m", cls: "btn--h44" })}

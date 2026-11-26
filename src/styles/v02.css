@@ -53,12 +53,12 @@
 }
 .hero__head { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-content-xs); }
 .hero__title {
-  display: flex; flex-direction: column; gap: var(--spacing-component-sm); align-items: flex-start;
-  font-size: 6rem; line-height: var(--type-display-lh); letter-spacing: var(--type-display-ls); /* 96 px: mimo typografických tokenov */
+  display: flex; flex-direction: column; gap: var(--spacing-component-sm); align-items: center;
+  font-size: 5.5rem; line-height: var(--type-display-lh); letter-spacing: var(--type-display-ls); /* 88 px: mimo typografických tokenov (Figma 131:4854) */
   white-space: nowrap;
 }
-.hero__line { display: flex; align-items: center; gap: var(--spacing-component-lg); }
-.hero__photo { position: relative; display: block; flex: none; width: 9rem; height: 4.75rem; border-radius: var(--radius-full); overflow: hidden; }
+.hero__line { display: flex; align-items: center; justify-content: center; gap: var(--spacing-component-lg); }
+.hero__photo { position: relative; display: block; flex: none; width: 9rem; height: 4.5rem; border-radius: var(--radius-full); overflow: hidden; }
 .hero__photo img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero__photo--crop img { object-position: 50% 100%; } /* orez z Figmy bez deformácie (Figma má výrez 149 % výšky) */
 .hero__bottom { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-content-sm); }
@@ -245,8 +245,9 @@ html.motion .stairs .stair[data-reveal].is-in { transform: none; }
   }
   .hero__content { position: static; transform: none; width: 100%; gap: var(--spacing-content-sm); }
   .hero__head { width: 100%; }
-  .hero__title { font-size: 2.75rem; gap: var(--spacing-component-xs); } /* 44 px: mimo tokenov */
-  .hero__line { gap: 0.4375rem; } /* 7: mimo tokenov */
+  .hero__title { font-size: var(--type-display-xl-size); gap: var(--spacing-component-xs); } /* 40 */
+  .hero__line { flex-wrap: wrap; column-gap: 0.4375rem; row-gap: var(--spacing-component-xs); } /* 7: mimo tokenov */
+  .hero__tail { flex-basis: 100%; text-align: center; } /* na mobile „po montáž“ na samostatnom riadku (113:1218) */
   .hero__photo { width: 4.5rem; height: 2.5rem; }
   .hero__lead { width: 100%; }
   .hero__actions { flex-direction: column; align-items: stretch; gap: var(--spacing-component-md); width: 100%; }

@@ -55,7 +55,7 @@
 
   /* Typography: Desktop mód */
   --font-family: "DM Sans", system-ui, sans-serif;
-  --type-display-xl-size: 5rem;      /* 80 */
+  --type-display-xl-size: 4.75rem;   /* 76 (Figma 26. 11.: predtým 80) */
   --type-display-l-size: 4rem;       /* 64 */
   --type-heading-xl-size: 2.5rem;    /* 40 */
   --type-heading-l-size: 2rem;       /* 32 */
