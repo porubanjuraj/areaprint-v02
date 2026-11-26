@@ -139,6 +139,18 @@ html.motion .stairs .stair[data-reveal].is-in { transform: none; }
 }
 .rs-slide.is-active .rs-slide__panel { transform: none; opacity: 1; }
 .rs-slide__text { display: flex; flex-direction: column; gap: var(--spacing-component-lg); }
+/* horný riadok panelu: chip + šípka v kruhu (143:4873) */
+.rs-slide__top { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; }
+.rs-slide__btn { background: var(--color-bg-subtle); }
+/* farebný hover panelu ako karty vo v01 */
+.rs-slide.is-active .rs-slide__panel { transition: transform 700ms var(--ease-out) 150ms, opacity 700ms var(--ease-out) 150ms, background-color 300ms ease, color 300ms ease; }
+.rs-slide__panel .muted, .rs-slide__panel .chip, .rs-slide__panel h3 { transition: background-color 300ms ease, color 300ms ease; }
+.rs-slide__panel:is(:hover, :focus-within) { background: var(--color-bg-dark); color: var(--color-text-on-dark); }
+.rs-slide__panel:is(:hover, :focus-within) .muted { color: var(--color-text-on-dark-muted); }
+.rs-slide__panel:is(:hover, :focus-within) .chip { background: var(--color-bg-dark-subtle); color: var(--color-text-on-dark); }
+.rs-slide__panel:is(:hover, :focus-within) .icon-btn { background: var(--color-bg-accent); color: var(--color-text-primary); }
+.rs-slide__panel:is(:hover, :focus-within) .icon-btn__arrow { transform: translate(100%, -100%); }
+.rs-slide__panel:is(:hover, :focus-within) .icon-btn::after { transform: none; }
 .rs__chapters { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-content-xs); }
 .rs .dots { display: none; }
 .rs-chapter { position: relative; display: flex; flex-direction: column; gap: var(--spacing-content-sm); width: 100%; text-align: left; padding-top: calc(var(--spacing-content-sm) + 2px); }

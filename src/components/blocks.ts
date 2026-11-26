@@ -94,7 +94,7 @@ export function RealizationsSlider(items: Realization[]) {
   const slides = items.map((r, i) => `<article class="${cx("rs-slide", i === 0 && "is-active")}" data-index="${i}" aria-hidden="${i === 0 ? "false" : "true"}">
       ${Photo({ name: r.photo, alt: r.alt, sizes: "(min-width: 1024px) 93vw, 90vw", cls: "rs-slide__photo", reveal: false })}
       <div class="rs-slide__panel">
-        ${Chip({ label: r.chip, tone: "subtle" })}
+        <div class="rs-slide__top">${Chip({ label: r.chip, tone: "subtle" })}${IconButton({ cls: "rs-slide__btn" })}</div>
         <div class="rs-slide__text">
           <h3 class="t-heading-xl"><a class="stretched" href="${r.href}"${i === 0 ? "" : ' tabindex="-1"'}>${r.title}</a></h3>
           <p class="t-body-m muted">${r.text}</p>
