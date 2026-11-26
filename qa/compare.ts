@@ -18,9 +18,9 @@ const DESKTOP: Box[] = [
   ["07-footer", 5573, 816, ".footer"],
 ];
 const MOBILE: Box[] = [
-  ["01-hero", 0, 660, ".hero"], ["02-riesenia", 660, 868, "#riesenia"], ["03-proces", 1528, 996, "#proces"],
-  ["04-realizacie", 2524, 948, "#realizacie"], ["05-technologie", 3472, 870, "#technologie"], ["06-magazin", 4342, 614, "#magazin"],
-  ["07-footer", 4956, 1196, ".footer"],
+  ["01-hero", 0, 698, ".hero"], ["02-riesenia", 698, 868, "#riesenia"], ["03-proces", 1566, 996, "#proces"],
+  ["04-realizacie", 2562, 948, "#realizacie"], ["05-technologie", 3510, 870, "#technologie"], ["06-magazin", 4380, 614, "#magazin"],
+  ["07-footer", 4994, 1196, ".footer"],
 ];
 
 async function shoot(width: number, file: string, boxes: Box[]) {
@@ -82,6 +82,6 @@ if (which !== "mobile") {
 }
 if (which !== "desktop") {
   const { height: h, ys } = await shoot(390, `${OUT}web-mobile-390.png`, MOBILE);
-  console.log("web výška mobil", h, "(Figma 6152)");
+  console.log("web výška mobil", h, "(Figma 6190)");
   await compare("mobile-390", `${OUT}figma/mobile-390.png`, `${OUT}web-mobile-390.png`, MOBILE, 390, ys);
 }

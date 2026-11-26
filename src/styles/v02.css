@@ -360,3 +360,6 @@ html.motion .stairs .stair[data-reveal].is-in { transform: none; }
 
 /* hero má vlastný stacking context: pripnutá navigácia v ňom musí byť nad ďalšími sekciami */
 .hero { z-index: 10; }
+
+/* výrez prvej realizácie na mobile podľa Figmy (CROP 113:1414) */
+@media (max-width: 1023.98px) { .rs-slide[data-index="0"] .rs-slide__photo img { object-position: 71% 50%; } }

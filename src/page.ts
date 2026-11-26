@@ -13,11 +13,11 @@ const LOGOS = ["Mecom", "Mirinda", "Pepsi", "Amundsen", "Božkov", "Mattoni", "P
 const LOGO_ROW = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 10];
 
 const SOLUTIONS: Solution[] = [
-  { icon: "posstand", title: "Retail a predajné miesta", text: "POS materiály, kartónové stojany a komunikácia v predajniach.", photo: "sol_retail", alt: "Svetlá predajňa s drevenými pultmi a vystaveným tovarom", href: "#" },
-  { icon: "billboard", title: "Kampane a veľkoplošná reklama", text: "Outdoorové formáty, bannery a polepy pre vašu komunikáciu.", photo: "sol_kampane", alt: "Prázdny podsvietený reklamný panel na zastávke v noci", href: "#" },
-  { icon: "booth", title: "Výstavy a eventy", text: "Prezentačné systémy, steny a materiály na podujatia.", photo: "sol_vystavy", alt: "Výstavný stánok s veľkoformátovou grafikou a pultom", href: "#" },
-  { icon: "signpost", title: "Orientačné systémy", text: "Označenie, polepy a vizuálne prvky pre vaše priestory.", photo: "sol_orientacne", alt: "Svetelný nápis WAY so šípkou zo žiaroviek", href: "#" },
-  { icon: "box", title: "Firemné tlačoviny a obaly", text: "Tlačové materiály, kartónové obaly a balenia na mieru.", photo: "sol_tlacoviny", alt: "Kartónové priečky v krabici zblízka", href: "#" },
+  { icon: "posstand", title: "Retail a predajné miesta", text: "POS materiály, kartónové stojany a komunikácia v predajniach.", photo: "sol_retail", alt: "Predajňa s kartónovým stojanom a zákazníčkou pri regáli", href: "#" },
+  { icon: "billboard", title: "Kampane a veľkoplošná reklama", text: "Outdoorové formáty, bannery a polepy pre vašu komunikáciu.", photo: "sol_kampane", alt: "Ulica so zastávkou, plagátom v citylighte a veľkoplošnou reklamou na budove", href: "#" },
+  { icon: "booth", title: "Výstavy a eventy", text: "Prezentačné systémy, steny a materiály na podujatia.", photo: "sol_vystavy", alt: "Výstavný stánok s farebnou stenou a ľuďmi pri pulte", href: "#" },
+  { icon: "signpost", title: "Orientačné systémy", text: "Označenie, polepy a vizuálne prvky pre vaše priestory.", photo: "sol_orientacne", alt: "Chodba s farebným orientačným polepom a šípkami na stenách", href: "#" },
+  { icon: "box", title: "Firemné tlačoviny a obaly", text: "Tlačové materiály, kartónové obaly a balenia na mieru.", photo: "sol_tlacoviny", alt: "Kartónová krabica, vizitky a tlačoviny na stole", href: "#" },
 ];
 
 const STEPS = [
@@ -29,9 +29,9 @@ const STEPS = [
 ];
 
 const REALIZATIONS: Realization[] = [
-  { chip: "Retail", title: "Uvedenie produktu v predajni", chapter: "Uvedenie produktu<br> v predajni", text: "Kartónový stojan, POS materiály<br class=\"br-m\"> a polepy<br class=\"br-d\"> ako jedno zadanie.", photo: "real_predajna", alt: "Interiér obchodného domu s predajnými ostrovčekmi", href: "#" },
-  { chip: "Kampane", title: "Kampaň vo verejnom priestore", chapter: "Kampaň vo verejnom priestore", text: "Viacero reklamných formátov<br> v jednom produkčnom procese.", photo: "real_kampan", alt: "Billboard pri ceste vo večernom svetle", href: "#" },
-  { chip: "Výstavy a eventy", title: "Prezentácia značky na podujatí", chapter: "Prezentácia značky<br> na podujatí", text: "Prezentačná stena, označenie<br> a sprievodné tlačoviny.", photo: "real_podujatie", alt: "Plná výstavná hala s návštevníkmi z vtáčej perspektívy", href: "#" },
+  { chip: "Retail", title: "Uvedenie produktu v predajni", chapter: "Uvedenie produktu<br> v predajni", text: "Kartónový stojan, POS materiály<br class=\"br-m\"> a polepy<br class=\"br-d\"> ako jedno zadanie.", photo: "real_predajna", alt: "Muž dopĺňa tovar do kartónového stojana v predajni", href: "#" },
+  { chip: "Kampane", title: "Kampaň vo verejnom priestore", chapter: "Kampaň vo verejnom priestore", text: "Viacero reklamných formátov<br> v jednom produkčnom procese.", photo: "real_kampan", alt: "Električka s reklamným polepom a billboard v historickom centre", href: "#" },
+  { chip: "Výstavy a eventy", title: "Prezentácia značky na podujatí", chapter: "Prezentácia značky<br> na podujatí", text: "Prezentačná stena, označenie<br> a sprievodné tlačoviny.", photo: "real_podujatie", alt: "Návštevníci pri prezentačnom stánku na podujatí", href: "#" },
 ];
 
 const TECH = [
@@ -65,7 +65,7 @@ function Hero() {
       </h1>
     </div>
     <div class="hero__bottom" data-reveal style="--reveal-delay:100ms">
-      <p class="hero__lead t-body-m muted"><span class="copy-d">Nemusíte koordinovať grafika, tlačiareň a montážnikov.<br> Celé zadanie prevezmeme a odovzdáme hotové priamo na mieste.</span><span class="copy-m">Navrhneme, technicky pripravíme, vyrobíme a nainštalujeme. Zastrešíme celý proces, aby ste sa mohli venovať svojmu biznisu.</span></p>
+      <p class="hero__lead t-body-m muted">Nemusíte koordinovať grafika, tlačiareň a montážnikov.<br class="br-d"> Celé zadanie prevezmeme a odovzdáme hotové priamo na mieste.</p>
       <div class="hero__actions">
         ${Button({ label: "Tlač na mieru", href: "#kontakt", style: "accent", size: "m", cls: "btn--h44" })}
         ${Button({ label: "Realizácie", href: "#realizacie", style: "outline", size: "m", cls: "btn--h44" })}
